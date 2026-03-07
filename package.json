@@ -1,0 +1,39 @@
+{
+  "name": "@mcp-servers/localstack",
+  "version": "0.1.0",
+  "description": "MCP server for LocalStack AWS services",
+  "type": "module",
+  "main": "dist/index.js",
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:integration": "vitest run --reporter=verbose",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1003.0",
+    "@aws-sdk/client-eventbridge": "^3.1003.0",
+    "@aws-sdk/client-kinesis": "^3.1003.0",
+    "@aws-sdk/client-lambda": "^3.1003.0",
+    "@aws-sdk/client-s3": "^3.758.0",
+    "@aws-sdk/client-secrets-manager": "^3.1003.0",
+    "@aws-sdk/client-ses": "^3.1003.0",
+    "@aws-sdk/client-sns": "^3.1003.0",
+    "@aws-sdk/client-sqs": "^3.758.0",
+    "@aws-sdk/client-ssm": "^3.1003.0",
+    "@aws-sdk/lib-dynamodb": "^3.1003.0",
+    "@modelcontextprotocol/sdk": "^1.6.1",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "jszip": "^3.10.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.7"
+  }
+}
