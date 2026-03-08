@@ -1,5 +1,5 @@
 {
-  "name": "@giovanemartins/localstack",
+  "name": "@giovane.martins/localstack",
   "version": "0.1.0",
   "description": "MCP server for LocalStack AWS services",
   "author": "Giovane Martins <3141734+giovanemartins@users.noreply.github.com>",
