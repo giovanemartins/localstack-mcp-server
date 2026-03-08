@@ -24,12 +24,10 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Install pnpm
-        run: npm install -g pnpm@9.15.9
+        run: npm install -g pnpm@latest
 
       - name: Install dependencies
         run: pnpm install
-        env:
-          PNPM_VERSION: 9.15.9
 
       - name: Run tests
         run: pnpm run test --if-present
