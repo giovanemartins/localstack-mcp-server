@@ -23,25 +23,18 @@ jobs:
           node-version: "lts/*"
           registry-url: "https://registry.npmjs.org"
 
-      - name: Enable Corepack (provides pnpm)
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
 
       - name: Install dependencies
-        run: |
-          # corepack has enabled pnpm, make sure it's available
-          pnpm --version
-          pnpm install
+        run: npx pnpm@9.15.9 install
 
       - name: Run tests
-        run: pnpm run test --if-present
+        run: npx pnpm@9.15.9 run test --if-present
 
       - name: Build package
-        run: pnpm run build --if-present
+        run: npx pnpm@9.15.9 run build --if-present
 
       - name: Publish package to npm
-        run: pnpm publish --access public
+        run: npx pnpm@9.15.9 publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
