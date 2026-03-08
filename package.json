@@ -6,6 +6,11 @@
   "type": "module",
   "main": "dist/index.js",
   "packageManager": "pnpm@9.15.9",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/giovanemartins/localstack-mcp-server.git"
+  },
+  "mcpName": "io.github.giovanemartins/localstack",
   "scripts": {
     "build": "tsc",
     "dev": "tsx watch src/index.ts",

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.giovanemartins/localstack",
+  "description": "MCP server for LocalStack AWS services, enabling LLMs and AI agents to interact with local AWS infrastructure during development and testing.",
+  "repository": {
+    "url": "https://github.com/giovanemartins/localstack-mcp-server",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@mcp-servers/localstack",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "description": "LocalStack endpoint URL",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false,
+          "name": "LOCALSTACK_ENDPOINT",
+          "default": "http://localhost:4566"
+        },
+        {
+          "description": "AWS region",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false,
+          "name": "AWS_REGION",
+          "default": "us-east-1"
+        },
+        {
+          "description": "AWS access key ID",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": true,
+          "name": "AWS_ACCESS_KEY_ID",
+          "default": "test"
+        },
+        {
+          "description": "AWS secret access key",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": true,
+          "name": "AWS_SECRET_ACCESS_KEY",
+          "default": "test"
+        }
+      ]
+    }
+  ]
+}
