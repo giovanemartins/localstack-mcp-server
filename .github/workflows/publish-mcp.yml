@@ -24,17 +24,23 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
 
+      - name: Install pnpm manually
+        run: |
+          curl -fsSL https://get.pnpm.io/install.sh | sh -
+          echo "# add pnpm to PATH" >> $GITHUB_PATH
+          echo "$HOME/.local/share/pnpm" >> $GITHUB_PATH
+
       - name: Install dependencies
-        run: npx pnpm@9.15.9 install
+        run: pnpm install
 
       - name: Run tests
-        run: npx pnpm@9.15.9 run test --if-present
+        run: pnpm run test --if-present
 
       - name: Build package
-        run: npx pnpm@9.15.9 run build --if-present
+        run: pnpm run build --if-present
 
       - name: Publish package to npm
-        run: npx pnpm@9.15.9 publish --access public
+        run: pnpm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
