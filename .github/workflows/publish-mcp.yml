@@ -38,17 +38,14 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           cache: "pnpm"
 
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
       - name: Sync version from tag
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
           pnpm version "$VERSION" --no-git-tag-version
-          node -e "
-            const fs = require('fs');
-            const s = JSON.parse(fs.readFileSync('server.json', 'utf8'));
-            s.version = '$VERSION';
-            s.packages[0].version = '$VERSION';
-            fs.writeFileSync('server.json', JSON.stringify(s, null, 2) + '\n');
-          "
+          jq --arg v "$VERSION" '.version = $v | .packages[0].version = $v' server.json > server.tmp && mv server.tmp server.json
 
       - name: Install dependencies
         run: pnpm install
@@ -70,6 +67,9 @@ jobs:
         run: |
           curl -L \
             "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+
+      - name: Validate server.json
+        run: ./mcp-publisher validate
 
       - name: Authenticate to MCP Registry
         run: ./mcp-publisher login github-oidc

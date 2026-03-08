@@ -1,10 +1,11 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.giovanemartins/localstack",
-  "description": "MCP server for LocalStack AWS services, enabling LLMs and AI agents to interact with local AWS infrastructure during development and testing.",
+  "description": "MCP server for LocalStack AWS services, enabling AI agents to interact with local AWS infra.",
   "repository": {
     "url": "https://github.com/giovanemartins/localstack-mcp-server",
-    "source": "github"
+    "source": "github",
+    "id": "955057457"
   },
   "version": "0.1.0",
   "packages": [
