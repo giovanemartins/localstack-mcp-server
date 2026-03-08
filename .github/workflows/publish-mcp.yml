@@ -11,20 +11,26 @@ jobs:
       id-token: write # Required for OIDC authentication
       contents: read
 
-    services:
-      localstack:
-        image: localstack/localstack:latest
-        ports:
-          - 4566:4566
-        options: >-
-          --health-cmd "curl -f http://localhost:4566/_localstack/health || exit 1"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 10
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
+
+      - name: Start LocalStack
+        run: |
+          docker run -d \
+            --name localstack \
+            -p 4566:4566 \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            localstack/localstack:latest
+          echo "Waiting for LocalStack to be ready..."
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:4566/_localstack/health > /dev/null 2>&1; then
+              echo "LocalStack is ready"
+              break
+            fi
+            echo "Attempt $i/30 - not ready yet..."
+            sleep 3
+          done
 
       # Publish underlying npm package:
 
