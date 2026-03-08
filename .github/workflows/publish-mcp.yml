@@ -17,18 +17,17 @@ jobs:
 
       # Publish underlying npm package:
 
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
       - name: Set up Node.js
         uses: actions/setup-node@v5
         with:
           node-version: "lts/*"
           registry-url: "https://registry.npmjs.org"
-
-
-      - name: Install pnpm manually
-        run: |
-          curl -fsSL https://get.pnpm.io/install.sh | sh -
-          echo "# add pnpm to PATH" >> $GITHUB_PATH
-          echo "$HOME/.local/share/pnpm" >> $GITHUB_PATH
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install
