@@ -1,14 +1,30 @@
 # LocalStack MCP Server
 
+[![MCP Registry](https://img.shields.io/badge/MCP%20Registry-published-blue)](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.giovanemartins%2Flocalstack/versions/latest)
+[![npm](https://img.shields.io/npm/v/%40giovane.martins%2Flocalstack)](https://www.npmjs.com/package/@giovane.martins/localstack)
+
 MCP server that exposes LocalStack-managed AWS services as AI-agent tools, enabling LLMs and AI agents to interact with local AWS infrastructure during development and testing.
+
+## Installation
+
+The server is published to npm and the [MCP Registry](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.giovanemartins%2Flocalstack/versions/latest). No local build needed.
+
+```bash
+npm install -g @giovane.martins/localstack
+```
+
+Or run directly with npx (no install required):
+
+```bash
+npx @giovane.martins/localstack
+```
 
 ## Requirements
 
 - Node.js 20+
-- pnpm 9+
 - Docker (for LocalStack)
 
-## Quick Start
+## Local Development
 
 ```bash
 # 1. Start LocalStack
@@ -45,7 +61,28 @@ pnpm test
 
 ## MCP Client Configuration
 
-Add to your MCP client config (e.g. `~/.config/claude/claude_desktop_config.json` MCP settings):
+### Using the published npm package (recommended)
+
+Add to your MCP client config (e.g. `~/.config/claude/claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "localstack": {
+      "command": "npx",
+      "args": ["-y", "@giovane.martins/localstack"],
+      "env": {
+        "LOCALSTACK_ENDPOINT": "http://localhost:4566",
+        "AWS_REGION": "us-east-1",
+        "AWS_ACCESS_KEY_ID": "test",
+        "AWS_SECRET_ACCESS_KEY": "test"
+      }
+    }
+  }
+}
+```
+
+### Using a local build
 
 ```json
 {
@@ -64,7 +101,7 @@ Add to your MCP client config (e.g. `~/.config/claude/claude_desktop_config.json
 }
 ```
 
-Or with `tsx` for development (no build step required):
+### Using `tsx` for development (no build step)
 
 ```json
 {
